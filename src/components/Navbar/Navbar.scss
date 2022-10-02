@@ -1,0 +1,48 @@
+.navigation {
+  display: flex;
+    
+  &__list {
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  &__item {
+    width: 200px;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 50px;
+    transition: all 0.3s;
+    box-sizing: border-box;
+
+    &:hover {
+      box-shadow: 5px 5px 5px #2d76aa;
+    }
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    color: #91218f;
+    border: 1px solid #2d76aa;
+    border-radius: 50px;
+    box-sizing: border-box;
+
+    &--active {
+      background-color: #1e6ac025;
+    }
+
+    &:hover {
+      font-weight: 600;
+    }
+  }
+}

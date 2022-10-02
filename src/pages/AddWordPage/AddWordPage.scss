@@ -1,0 +1,59 @@
+.add-word {
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 18px;
+  color: #1C1A26;
+  box-sizing: border-box;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__field-title {
+    line-height: 30px;
+  }
+
+  &__field {
+    width: 300px;
+    height: 30px;
+    padding-left: 10px;
+    display: block;
+    font-size: 16px;
+    box-sizing: border-box;
+    &::placeholder {
+      font-size: 14px;
+    }
+  }
+
+  &__button {
+    width: max-content;
+    height: 40px;
+    font-size: 18px;
+    color: #1e5fc0;
+    background-color: #fff;
+    border: 1px solid #2d76aa;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #e4e3e3;
+    }
+  }
+
+  &__message {
+    padding-top: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+
+    &--success {
+      color: #5bde5b;
+    }
+
+    &--warning {
+      color: #d84040;
+    }
+  }
+}
