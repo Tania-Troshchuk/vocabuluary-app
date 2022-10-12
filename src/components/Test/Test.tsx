@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { getWordsForTest } from '../../features/testHelper';
 import { actions as histotyAactions } from '../../features/historyReducer';
 import { HistoryObj } from '../../types/HistoryObj';
 import { VocabularyObj } from '../../types/VocabularyObj';
+import { Result } from '../Result/Result';
 
 type Props = {
   vocabulary: VocabularyObj[],
@@ -17,64 +19,14 @@ export const Test: React.FC<Props> = ({ vocabulary }) => {
   const [result, setResult] = useState(0);
   const [lastTest, setLastTest] = useState(false);
 
+  const wordsForTest = useMemo(
+    () => getWordsForTest(copyVocabulary, testLength, numberOfOptions),
+    [],
+  );
   const testForHistory: HistoryObj[] = useMemo(() => [], []);
 
   const dispatch = useDispatch();
   const add = (test: HistoryObj[]) => dispatch(histotyAactions.add(test));
-
-  const getRandomNumber = (number: number) => {
-    return Math.floor(Math.random() * number);
-  };
-
-  const getWordIndexes = (number: number) => {
-    const indexes: number[] = [];
-
-    while (indexes.length < number) {
-      const index = getRandomNumber(copyVocabulary.length);
-
-      if (!indexes.includes(index)) {
-        indexes.push(index);
-      }
-    }
-
-    return indexes;
-  };
-
-  const getOptions = (objIndex: number) => {
-    const correctTranslation = copyVocabulary[objIndex].translation.join(', ');
-    const options: string[] = [correctTranslation];
-
-    while (options.length < numberOfOptions) {
-      const index = getRandomNumber(copyVocabulary.length);
-      const word = copyVocabulary[index].translation.join(', ');
-
-      if (index !== objIndex && !options.includes(word)) {
-        options.push(word);
-      }
-    }
-
-    return options;
-  };
-
-  const getWordsForTest = () => {
-    const wordIndexes = getWordIndexes(testLength);
-
-    const arrOfWords = wordIndexes.map((index) => {
-      const obj = copyVocabulary[index];
-      const options = getOptions(index);
-
-      const preparedObj = {
-        ...obj,
-        options: [...options].sort(() => 0.5 - Math.random()),
-      };
-
-      return preparedObj;
-    });
-
-    return arrOfWords;
-  };
-
-  const wordsForTest = useMemo(getWordsForTest, []);
 
   const handleTestClick = (currentObj: VocabularyObj, choosedTranslation: string) => {
     const nextIndex = currentTestIndex + 1;
@@ -132,16 +84,7 @@ export const Test: React.FC<Props> = ({ vocabulary }) => {
           </div>
         </>
       ) : (
-        <div className="test__result">
-          {result === 10 ? (
-            <div className="test__result test__result--excellent">
-              <div>&#127881;&#127881;&#127881;</div>
-              {`Вітаємо ${result * 10}% правильних відповідей`}
-            </div>
-          ) : (
-            `Правильних відповідей: ${result * 10}%`
-          )}
-        </div>
+        <Result result={result} />
       )}
     </div>
   );

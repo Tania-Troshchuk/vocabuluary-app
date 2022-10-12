@@ -3,7 +3,6 @@
   font-weight: 400;
   font-size: 18px;
   color: #1C1A26;
-  box-sizing: border-box;
 
   &__form {
     display: flex;
@@ -21,7 +20,7 @@
     padding-left: 10px;
     display: block;
     font-size: 16px;
-    box-sizing: border-box;
+
     &::placeholder {
       font-size: 14px;
     }
